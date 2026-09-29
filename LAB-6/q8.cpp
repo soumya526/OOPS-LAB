@@ -1,33 +1,50 @@
-/*8. GameScore Adjustment
-A game stores the scores of n players in an array.
-Write a function that receives a pointer to the scores and the number of players. The
-function should increase every score by 10.
-Display the scores before and after calling the function.
-Condition: The original array must be modified using pointers*/
-
-#include<iostream>
+#include <iostream>
 using namespace std;
 
-void f(int*arr,int n){
-    for(int i=0;i<n;i++){
-        arr[i]+=10;
+class Item {
+    string name;
+    float price;
+    int quantity;
+
+public:
+    Item(string n = "", float p = 0, int q = 0) {
+        name = n;
+        price = p;
+        quantity = q;
     }
-}
-int main(){
-    int*arr=new int[5];
-    for(int i=0;i<5;i++){
-        cout<<"Enter the "<<i<<"th element"<<endl;
-        cin>>arr[i];
+
+    Item operator+(Item item) {
+        if (name == item.name && price == item.price) {
+            return Item(name, price, quantity + item.quantity);
+        }
+
+        cout << "Items cannot be combined because they are different."
+             << endl;
+
+        return *this;
     }
-    for(int i=0;i<5;i++){
-        cout<<"The "<<i<<"th element"<<endl;
-        cout<<arr[i]<<endl;
+
+    void display() {
+        cout << "Item: " << name << endl;
+        cout << "Price: " << price << endl;
+        cout << "Quantity: " << quantity << endl;
     }
-    f(arr,5);
-    cout<<"After function called:"<<endl;
-        for(int i=0;i<5;i++){
-        cout<<"The "<<i<<"th element"<<endl;
-        cout<<arr[i]<<endl;
-    }
+};
+
+int main() {
+    Item i1("Pen", 10, 5);
+    Item i2("Pen", 10, 8);
+
+    Item i3 = i1 + i2;
+
+    cout << "Combined Item:" << endl;
+    i3.display();
+
+    cout << "\nOriginal Item 1:" << endl;
+    i1.display();
+
+    cout << "\nOriginal Item 2:" << endl;
+    i2.display();
+
     return 0;
 }

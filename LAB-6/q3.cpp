@@ -1,28 +1,38 @@
-/*3. Library Shelf
-A library stores the identification numbers of 6 books in an array.
-Write a program to:
-1. Display all book IDs using a pointer.
-2. Display the address of each book ID.
-Condition: Traverse the array using pointer increment*/
+/*3. Student Marks Comparison
+Create a class Student containing student name and total marks.
+Overload the > operator to compare two Student objects based on their total marks.
+Use the overloaded operator to determine which student has higher marks.
+Condition: The overloaded operator must return a bool value*/
 
 #include<iostream>
 using namespace std;
 
+class Student{
+    string name;
+    int marks;
+    public:
+        Student(string s,int b){
+            name=s;
+            marks=b;
+        }
+        bool operator>(Student obj){
+            return marks>obj.marks;
+        }
+        void display(){
+            cout<<"Name: "<<name<<endl;
+            cout<<"Marks: "<<marks<<endl;
+        }
+
+};
+
 int main(){
-    int *arr=new int[6];
-    cout<<"Enter the IDs of books"<<endl;
-    for(int i=0;i<6;i++){
-        cout<<"Enter ID of "<<i<<" Book:"<<endl;
-        cin>>arr[i];
+    Student s1("SS",33);
+    Student s2("FF",90);
+    if(s1>s2){
+        cout<<"Student 1 has highest mark"<<endl;
     }
-    cout<<"The Book IDs are:"<<endl;
-    for(int i=0;i<6;i++){
-        cout<<arr[i]<<" ";
-    }
-    cout<<endl;
-    cout<<"Address of each book IDs:"<<endl;
-    for(int i=0;i<6;i++){
-        cout<<&arr[i]<<" ";
+    else{
+        cout<<"Student 2 has highest marks"<<endl;
     }
     return 0;
 }

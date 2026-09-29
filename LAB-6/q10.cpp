@@ -1,34 +1,65 @@
-/*10. Student ID Search
-A university receives a variable number of student IDs.
-Write a program that:
-1. Dynamically allocates memory for n student IDs.
-2. Accepts all student IDs.
-3. Searches for a particular ID using pointer traversal.
-4. Displays whether the ID is found and its position.
-5. Properly deallocates the memory.
-Condition: Do not use array indexing while searching.*/
-
-#include<iostream>
+#include <iostream>
+#include <string>
 using namespace std;
 
-int main(){
-    int *arr=new int[5];
-    for(int i=0;i<5;i++){
-        cout<<"Enter the "<<i<<"th: "<<endl;
-        cin>>arr[i];
+class Product {
+    string name;
+    float price;
+    int quantity;
+
+public:
+    Product(string n, float p, int q) {
+        name = n;
+        price = p;
+        quantity = q;
     }
-    cout<<"Enter the ID u want to search:"<<endl;
-    int n;
-    cin>>n;
-    for(int i=0;i<5;i++){
-        if(arr[i]==n){
-            cout<<"ID found at position "<<i<<endl;
-            break;
+
+    // Overload +
+    Product operator+(Product& other) {
+        if (name == other.name && price == other.price) {
+            return Product(name, price, quantity + other.quantity);
         }
-        else if(arr[i]!=n && i==4){
-            cout<<"ID not found"<<endl;
-        }
+
+        cout << "Products cannot be combined.\n";
+        return *this;
     }
-    delete[] arr;
+
+    // Overload >
+    bool operator>(Product& other) {
+        return (price * quantity) > (other.price * other.quantity);
+    }
+
+    void display() {
+        cout << "Product: " << name << endl;
+        cout << "Price: " << price << endl;
+        cout << "Quantity: " << quantity << endl;
+        cout << "Total Value: " << price * quantity << endl;
+    }
+};
+
+int main() {
+    Product p1("Laptop", 50000, 2);
+    Product p2("Comp", 50000, 3);
+
+    // Using + operator
+    Product p3 = p1 + p2;
+
+    cout << "Combined Product:\n";
+    p3.display();
+
+    // Using > operator
+    cout << "\nComparing total values:\n";
+
+    if (p1 > p2)
+        cout << "Product 1 has greater total value.\n";
+    else
+        cout << "Product 2 has greater or equal total value.\n";
+
+    cout << "\nOriginal Product 1:\n";
+    p1.display();
+
+    cout << "\nOriginal Product 2:\n";
+    p2.display();
+
     return 0;
 }

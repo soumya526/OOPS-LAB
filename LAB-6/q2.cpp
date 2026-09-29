@@ -1,30 +1,38 @@
-/*2. Digital Wallet Balance
-A digital wallet stores the current balance of a user.
-Create a pointer pointing to the balance. Using the pointer:
-1. Display the current balance.
-2. Addaspecified amount.
-3. Deduct a specified amount.
-4. Display the final balance*/
-
+/*2. Complex NumberSubtraction
+Create a class Complex containing real and imaginary parts.
+Overload the- operator to subtract two complex numbers.
+For example:
+C1 = 8 + 5i
+C2 = 3 + 2i
+C1- C2 = 5 + 3i
+Display the result in a proper complex-number format*/
 #include<iostream>
 using namespace std;
 
+class Complex{
+    int real;
+    int img;
+    public:
+        Complex(int a,int b){
+            real=a;
+            img=b;
+        }
+        Complex operator-(Complex obj){
+            Complex temp(0,0);
+            temp.real=real-obj.real;
+            temp.img=img-obj.img;
+            return temp;
+        }
+        void display(){
+            cout<<real<<" + "<<img<<"i"<<endl;
+        }
+};
+
 int main(){
-    int balance;
-    cout<<"Enter the balance: "<<endl;
-    cin>>balance;
-    int*p=&balance;
-    cout<<"Current Balance: "<<balance<<endl;
-    int a;
-    cout<<"Enter the amount to be added: "<<endl;
-    cin>>a;
-    *p=*p+a;
-    cout<<"Updated amount: "<<*p<<endl;
-    cout<<"Enter the deducted amount:"<<endl;
-    int d;
-    cin>>d;
-    *p=*p-d;
-    cout<<"The updated amount: "<<endl;
-    cout<<*p;
+    Complex c1(5,2);
+    Complex c2(7,9);
+    Complex c3(0,0);
+    c3=c2-c1;
+    c3.display();
     return 0;
 }

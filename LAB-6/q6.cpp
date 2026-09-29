@@ -1,34 +1,64 @@
-/*6. Grocery Price Scanner
-A grocery store stores the prices of 7 products.
-Write a function that receives:
-• Apointer to the first price.
-• Thenumberofproducts.
-Using pointer traversal, find and display the highest price.
-Condition: Do not use array indexing inside the function*/
+/*6. Counter Increment
+Create a class Counter containing an integer value.
+Overload the increment operator to support both prefix and postfix forms:
+++c;
+c++;
+Both operations should increase the counter value by 1.
+Display the value before and after each operation.
+Hint: Prefix and postfix increment operators require different function signatures.*/
 
-#include<iostream>
+#include <iostream>
 using namespace std;
 
-int d(int*arr,int n){
-    int *maxi=new int;
-    *maxi=0;
-    for(int i=0;i<7;i++){
-        if(*maxi<=*arr){
-            *maxi=*arr;
-        }
-        arr++;
-    }
-    return *maxi;
-}
+class Counter {
+private:
+    int value;
 
-int main(){
-    int *arr=new int[7];
-    cout<<"Enter the Price of products:"<<endl;
-    for(int i=0;i<7;i++){
-        cin>>arr[i];
+public:
+    Counter(int v = 0){
+        value=v;
     }
-    int h;
-    h=d(arr,7);
-    cout<<"The highest price: "<<h<<endl;
+
+    Counter& operator++() {
+        ++value;
+        return *this;
+    }
+
+    Counter operator++(int) {
+        Counter temp = *this;
+        value++;              
+        return temp;          
+    }
+
+    void display() const {
+        cout << value << endl;
+    }
+};
+
+int main() {
+    Counter c(10);
+
+    cout << "Initial Counter value: ";
+    c.display();
+    cout << "---------------------------" << std::endl;
+
+    cout << "Before Prefix (++c): ";
+    c.display();
+    
+    ++c;
+    
+    cout << "After Prefix (++c):  ";
+    c.display();
+    cout << "---------------------------" << std::endl;
+
+    // Testing Postfix Increment
+    cout << "Before Postfix (c++): ";
+    c.display();
+    
+    c++;
+    
+    cout << "After Postfix (c++):  ";
+    c.display();
+
     return 0;
 }

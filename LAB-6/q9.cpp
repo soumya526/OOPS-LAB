@@ -1,31 +1,37 @@
-/*9. Parking Slot Monitor
-A parking system does not know in advance how many parking slots it needs to store.
-Write a program that:
-1. Dynamically allocates memory for n parking slot statuses.
-2. Uses 0 for available and 1 for occupied.
-3. Counts available and occupied slots using a pointer.
-4. Releases the dynamically allocated memory*/
-
-#include<iostream>
+#include <iostream>
 using namespace std;
 
-int main(){
-    int *arr=new int[5];
-    for(int i=0;i<5;i++){
-        cout<<"Enter the occupancy for "<<i+1<<"th:"<<endl;
-        cin>>arr[i]; 
+class Temperature {
+    float celsius;
+
+public:
+    Temperature(float c) {
+        celsius = c;
     }
-    int a=0,o=0;
-    for(int i=0;i<5;i++){
-        if(arr[i]==1){
-            o++;
-        }
-        else{
-            a++;
-        }
+
+    bool operator<(Temperature& other) {
+        return celsius < other.celsius;
     }
-    cout<<"The occupied slots are: "<<o<<endl;
-    cout<<"The occupied slots are: "<<a<<endl;
-    delete[] arr;
+
+    bool operator>(Temperature& other) {
+        return celsius > other.celsius;
+    }
+
+    void compare(Temperature& other) {
+        if (*this < other)
+            cout << "First temperature is lower than the second.\n";
+        else if (*this > other)
+            cout << "First temperature is higher than the second.\n";
+        else
+            cout << "Both temperatures are equal.\n";
+    }
+};
+
+int main() {
+    Temperature t1(25);
+    Temperature t2(30);
+
+    t1.compare(t2);
+
     return 0;
 }

@@ -1,31 +1,30 @@
-/*7. Message Inspector
-A messaging application stores a sentence in a character array.
-Using a character pointer, count:
-• Numberofuppercase letters.
-• Numberoflowercase letters.
-• Numberofspaces.
-Traverse the sentence until the null character ’\0’*/
-
+/*7. Date Equality Checker
+Create a class Date containing day, month, and year.
+Overload the == operator to determine whether two Date objects represent the same date.
+For example:
+Date 1: 15 08 2026
+Date 2: 15 08 2026
+Output: Both dates are equal.
+The overloaded operator should return a Boolean result*/
 #include<iostream>
 using namespace std;
+class Date{
+    int day,month,year;
+    public:
+        Date(int d,int m,int y){
+            day=d;
+            month=m;
+            year=y;
+        }
+        bool operator==(Date d){
+            return day==d.day && month==d.month && day==d.day;
+        }
+};
 
 int main(){
-    char arr1[5]={'a','A',' ','l','T'};
-    char*arr=arr1;
-    int u=0,l=0,s=0;
-    for(int i=0;i<5;i++){
-        if(arr[i]>='a' && arr[i]<='z'){
-            l++;
-        }
-        else if(arr[i]>='A' && arr[i]<='Z'){
-            u++;
-        }
-        else if(arr[i]==' '){
-            s++;
-        }
-    }
-    cout<<"Lower Case: "<<l<<endl;
-    cout<<"Upper Case: "<<u<<endl;
-    cout<<"Spaces: "<<s<<endl;
+    Date d1(15,7,6);
+    Date d2(23,8,9);
+    if(d1==d2) cout<<"Both dates are equal"<<endl;
+    else cout<<"Not equal"<<endl;
     return 0;
 }
